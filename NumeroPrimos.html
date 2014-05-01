@@ -1,0 +1,36 @@
+<html>
+<style type="text/css">
+  body{
+    background: url(Fondo.png);
+  }
+  </style>
+<script type="text/javascript">
+function Primo(form) {
+var num=parseInt(form.numero.value);
+if (isNaN(num) || num < 0) {
+form.resultado.value=(form.numero.value + " No Es Un Numero Valido");
+}
+if (num == 1 || num == 2) {
+form.resultado.value=(num + " Es Primo");
+}
+for (var i=2;i<num;i++) {
+if (num % i == 0) {
+var prime="yes";
+form.resultado.value=(num + " no es primo, es divisible por " + i + ".");
+break;
+}
+if (num % i != 0) var prime="no";
+}
+if (prime == "no") form.resultado.value=(num + " Es Primo");
+} 
+// Fin -->
+</script>
+<br><br><br><br><center>
+<form name="form">
+<h1><font> Averigua Si El Numero Es Primo</font></h2>
+<input type="number" name="numero" maxlength="10" placeholder='Solo Numero' onchange="Primo(this.form)">
+<input type="button" value="Calcular" onClick="Primo(this.form)"> </p>
+<p><input type="text" name="resultado" size="45" value> </p>
+</form>
+
+</html>

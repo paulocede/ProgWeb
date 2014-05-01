@@ -1,0 +1,46 @@
+
+<br><br><br><br><center><h1>Suma </h1>
+</center>
+<html>
+<head>
+<style type="text/css">
+  body{
+    background: url(Fondo.png);
+  }
+  </style>
+</head>
+ <body>
+
+
+  <form>
+  <center>
+  <input type="text" name="nota1"   onkeypress= "validar(this.value)" >
+  <input type ="button" value="Validar" onClick="resultado()" >
+</form>
+</center>
+ </body>
+
+
+ <script type="text/javascript">
+
+ function validar(x){
+ a=0
+y= x.length
+for(i=0; i<y; i++){
+z= x.substring(i,i+1);
+if((z=="0") || (z=="1" ) ){
+a=a+1
+}
+
+}
+if (a == y){
+
+alert("si es binario")}
+else{
+alert("No es binario")
+}
+
+ }
+
+ </script>
+ </html>

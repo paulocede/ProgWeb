@@ -1,0 +1,203 @@
+<html>
+<head>
+
+<title>Factura Sys-Infor</title>
+
+<style type="text/css">
+  body{
+    background: url(Fondo.png);
+  }
+  </style>
+<script type="text/javascript">
+
+num=0;
+function crear(obj) {
+  num++;
+  fi = document.getElementById('fiel'); // 1
+  contenedor = document.createElement('div'); // 2
+  contenedor.id = 'div'+num; // 3
+
+  fi.appendChild(contenedor); // 4
+
+  ele = document.createElement('input'); // 5
+  ele2 = document.createElement('input'); // 5
+  ele3 = document.createElement('input'); // 5
+  ele4 = document.createElement('input'); // 5
+
+  ele.type = 'text'; // 6
+  ele.name = 'item[]'; // 6
+  ele.size = 5; 
+  contenedor.appendChild(ele); // 7
+  
+  ele2.type = 'text'; // 6
+  ele2.name = 'desc[]'; // 6
+  ele2.size = 100; 
+  contenedor.appendChild(ele2); // 7
+  
+  ele3.type = 'text'; // 6
+  ele3.name = 'precio[]'; // 6
+  ele3.size = 7;
+  ele3.onkeyup = function(){addHiddenNeto(this.value)}
+  ele3.onfocus = function(){setHiddenNeto(this.value)}
+  contenedor.appendChild(ele3); // 7
+
+
+
+  ele4.type = 'button'; // 6
+  ele4.value = 'Borrar'; // 8
+  ele4.name = 'div'+num; // 8
+  ele4.id = num;
+  ele4.onclick = function () {borrar(this.name, this.parentNode)} // 9
+  contenedor.appendChild(ele4); // 7
+}
+
+function borrar(obj, getP) {
+    P = getP.childNodes[2].value;
+    if(P == ""){P = 0;}
+    document.form1.neto.value = parseFloat(document.form1.neto.value)-parseFloat(P);
+    fi = document.getElementById('fiel'); // 1 
+    fi.removeChild(document.getElementById(obj)); // 10
+    setNeto();
+}
+function addHiddenNeto(n){
+    if(n==""){n=0;}
+    document.form1.neto.value = document.form1.neto.value-document.form1.hiddenNeto.value;
+    document.form1.hiddenNeto.value = n;
+    document.form1.neto.value = roundNumber(eval(parseFloat(document.form1.neto.value)+parseFloat(document.form1.hiddenNeto.value)),2);
+    setNeto();
+    //document.form1.item.value=roundNumber(eval(parseFloat(document.form1.item.value)*parseFloat(document.form1.hiddenitem.value)),2);
+}
+	
+
+function setHiddenNeto(n){
+    if(n==""){n=0;}
+    document.form1.hiddenNeto.value = n;
+    setNeto();
+}
+function setNeto(){
+    if(document.form1.descuento.value == ""){document.form1.descuento.value = 0;}
+    document.form1.tsi.value = roundNumber(parseFloat(document.form1.neto.value)-parseFloat(document.form1.descuento.value),2);
+    //Se tiene que calcular por 0.12 ya que la matematica para 12% es esa.
+    document.form1.tci.value = roundNumber(parseFloat(document.form1.tsi.value)+(parseFloat(0.12) * parseFloat(document.form1.tsi.value)),2);
+}
+function roundNumber(rnum, rlength) { // Arguments: number to round, number of decimal places
+    return Math.round(rnum*Math.pow(10,rlength))/Math.pow(10,rlength);
+}
+--> 
+</script>
+
+<style type="text/css">
+<!--
+body {
+    background-color: #797979;
+}
+.Estilo4 {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold; color: #999999; }
+.Estilo14 {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 16px; color: #666666; font-weight: bold; }
+.Estilo45 {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight: bold; color: #333333; }
+.Estilo49 {font-family: Verdana, Arial, Helvetica, sans-serif}
+
+.Estilo36 {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    color: #000000;
+}
+.Estilo38 {font-size: 12px}
+.Estilo48 {color: #999999}
+.Estilo4 {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold; color: #999999; }
+-->
+</style>
+
+</head>
+<body>
+
+<form name="form1" method="post" action="">
+<input type="hidden" name="hiddenNeto" value="0">
+<table width="960" height="415" border="0" align="center" bgcolor="#FFFFFF">
+  <tr>
+    <td height="24"></td>
+    <td height="24" colspan="9"></td>
+    <td width="155" rowspan="2"><div align="center"></div></td>
+  </tr>
+  
+  <tr>
+    <td height="107"></td>
+    <td height="107" colspan="9"></td>
+  </tr>
+  <tr>
+    <td width="16" height="0"></td>
+    <td colspan="10"><table width="881" border="0" align="center">
+      <tr>
+        <td width="13"></td>
+        <td width="58"><div align="center" class="Estilo4">Item</div></td>
+        <td width="628"><div align="center" class="Estilo4">Descripcion</div></td>
+        <td width="82"><div align="center" class="Estilo4">Precio</div></td>
+        <td width="78"><span class="Estilo4">Borrar</span></td>
+      </tr>
+      <tr>
+        <td colspan="5"><fieldset id="fiel"></fieldset><input name="button" type="button" onClick="crear(this)" value="Crear" /></td>
+      </tr>
+    </table></td>
+  </tr>
+  
+  
+  <tr>
+    <td height="25" rowspan="5"></td>
+    <td width="86" rowspan="5"></td>
+    <td width="102" rowspan="5"></td>
+    <td width="102" rowspan="5"></td>
+    <td width="102" rowspan="5"></td>
+    <td width="102" rowspan="5"></td>
+    <td width="102" rowspan="5"></td>
+    <td width="113"></td>
+    <td colspan="2">
+      <label>      </label>
+      <div align="center">
+        <input name="fin" type="checkbox" id="fin" onClick="calcular(this)" value="entregado">
+      </div>      </td>
+    <td class="Estilo45">Fin de proceso </td>
+  </tr>
+  <tr>
+    <td width="113"><div align="right">
+      <input name="Calcular" type="button" value="Calcular" onclick="funcion_calcular" /> 
+    </div></td>
+    <td colspan="2" class="Estilo45">Neto</td>
+    <td>
+           <label>
+        <input name="neto" type="text" id="neto" value="0" readonly>
+        </label>    
+    </td>
+  </tr>
+  <tr>
+    <td width="113"></td>
+    <td colspan="2" class="Estilo45">Desc</td>
+    <td><input name="descuento" type="text" id="descuento" onkeyup="setNeto()"></td>
+  </tr>
+  <tr>
+    <td width="113"></td>
+    <td colspan="2" class="Estilo45">TSI</td>
+    <td><input name="tsi" type="text" id="tsi" readonly></td>
+  </tr>
+  <tr>
+    <td width="113"></td>
+    <td colspan="2" class="Estilo45">Total Pagar</td>
+    <td><input name="tci" type="text" id="tci" readonly></td>
+  </tr>
+  <tr>
+    <td height="38"></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td colspan="2"></td>
+    <td><input type="submit" name="button2" id="button" value="Registrar" /></td>
+  </tr>
+</table>
+</form>
+<p></p>
+<p></p>
+<p></p>
+</body>
+</html> 

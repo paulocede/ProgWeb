@@ -1,0 +1,43 @@
+<HTML>
+	<HEAD>
+	<style type="text/css">
+  body{
+    background: url(Fondo.png);
+  }
+  </style>
+	<br><br><h1><title>Invertir Cadena</title>
+
+	<SCRIPT LANGUAGE="JavaScript">
+	
+	
+	function reverse(form) {
+	text = "";
+	str = form.revtext.value;
+	for (i = 0; i <= str.length; i++)
+	text = str.substring(i, i+1) + text;
+	form.revtext.value = text;
+	}
+	
+	</script>
+	</HEAD>
+	
+	<BODY>
+	
+	
+	<CENTER>
+	<center>
+	<center><center><font face=Verdana>
+	<br><b>Invertir cadena </b></font><font face=arial size="1"><font color=white size="2" face="ariaL"><p>;
+
+	</font><font color=white size="2" face="ariaL"><p>
+	<form>
+	<input type=text name=revtext  size="20">
+	<input type=button value="Invertir" onClick="reverse(this.form)">
+	</form>
+	
+	<CENTER><P>
+	</td></tr>
+	</table>
+	</BODY>
+	
+	</HTML>
